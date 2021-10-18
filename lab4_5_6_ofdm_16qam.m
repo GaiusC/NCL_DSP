@@ -29,7 +29,7 @@ for m=1:length(SNR)
     tx=randi([0 M-1],1,nsymbol);% Generate random order in signal
     Dn_16qam_mod=C(tx+1);% Map the order to generate 16QAM signal
     %---ifft---
-    tx_signal_time=ifft(Dn_16qam_mod,100)*sqrt(nsymbol);
+    tx_signal_time=ifft(Dn_16qam_mod)*sqrt(nsymbol);
     %---Insert Cyclic Prefix---
     dn_cp=[tx_signal_time(:,1:cp_length),tx_signal_time];
     
@@ -41,7 +41,7 @@ for m=1:length(SNR)
     %---Remove Cyclic Prefix---
     rx_cp=signal(1,cp_length+1:end);
     %---fft---
-    rx_signal_freq=fft(rx_cp,100)/sqrt(nsymbol);
+    rx_signal_freq=fft(rx_cp)/sqrt(nsymbol);
     %---16QAM Demodulation---
     for l =1:nsymbol
         C_Dk = sqrt(abs(C-rx_signal_freq(l)).^2);
@@ -69,4 +69,4 @@ legend("BER", "Theoretical BER");
 grid on;
 
 %======Save Results======
-save lab4_ofdm_16qam_results
+%save lab4_ofdm_16qam_results
