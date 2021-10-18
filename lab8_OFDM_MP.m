@@ -124,3 +124,6 @@ legend('16 QAM MP(Semi.)','16 QAM MF MP (Sim.)','16 QAM ZF MP(Sim.)','16 QAM MMS
 ylim([1e-5 1]);
 xlim([0 30]);
 grid on;
+
+%===Save results===
+save lab8_OFDM_MP_results;

@@ -135,22 +135,22 @@ end
 
 %===Plot results===
 % Czf and Cmmes
-% figure()
-% plot(Dk_est_zf,'o');
-% title('Czf');
-% figure()
-% plot(Dk_est_mmse,'o');
-% title('Cmmse');
+figure()
+plot(Dk_est_zf,'o');
+title('Czf');
+figure()
+plot(Dk_est_mmse,'o');
+title('Cmmse');
 % Hk and estimated Hk
-% figure()
-% plot(abs(Hk),'r-');
-% hold on;
-% plot(abs(Hk_est),'b--');
-% title('SNR=30dB, K=64');
-% legend('Hk','Estimated Hk');
-% xlim([0 2048]);
-% grid on;
-% hold off;
+figure()
+plot(abs(Hk),'r-');
+hold on;
+plot(abs(Hk_est),'b--');
+title('SNR=30dB, K=64');
+legend('Hk','Estimated Hk');
+xlim([0 2048]);
+grid on;
+hold off;
 % BER
 figure()
 semilogy(SNR_mp,Pb_MP,'b-',SNR_mp,ber_sim_16qam_mp_zf,'o-g',SNR_mp,ber_sim_16qam_mp_mmse,'*-y');
@@ -169,4 +169,7 @@ ylabel('MSE(dB)');
 xlim([0 30]);
 ylim([-40 -10]);
 grid on;
+
+%===Save results===
+save lab9_OFDM_MP_PILOT;
 toc

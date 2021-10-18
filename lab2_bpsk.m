@@ -70,4 +70,4 @@ grid on;
 legend("BPSK in AWGN","BPSK in Rayleigh","Semi-analytial","Full Simulation");
 toc
 %save results
-%save lab2_bpsk_results;
+save lab2_bpsk_results;
