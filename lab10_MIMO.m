@@ -8,9 +8,9 @@ RandStream.setGlobalStream(RS);
 %---16QAM parameter---
 M = 16;% M for 16 QAM
 symbol_bits = log2(M);% 4 bits for a symbol in 16 QAM
-SNR_start = 0;
+SNR_start = -20;
 SNR_step = 1;
-SNR_end = 40;
+SNR_end = 30;
 SNR = SNR_start:SNR_step:SNR_end;
 SNR_lin = 10.^(SNR/10);% multipath linear SNR
 C = [-3+3j -3+1j -3-3j -3-1j -1+3j -1+1j -1-3j -1-1j 1+3j 1+1j 1-3j 1-1j 3+3j 3+1j 3-3j 3-1j];% Graycode rule
@@ -22,10 +22,10 @@ gamma_s=(Es.^2)./(sigma.^2);
 
 %---MIMO parameter---
 ntx = 2;
-nrx = 2;
+nrx = 10;
 
 %===Simulation===
-Nav = 1e4;
+Nav = 1e5;
 %---define the size of variables---
 C_Dk_zfe = zeros(1,ntx);
 C_Dk_mmse = zeros(1,ntx);
@@ -57,6 +57,7 @@ for m=1:length(SNR)
             C_zfe = pinv(H);
         end
         H_p = conj(H.');
+        %---AWGN noise---
         awgn_noise = sigma(m)*(randn(nrx,1)+1i*randn(nrx,1));
         signal_mimo = H*Dn_16qam_mod+awgn_noise*sqrt(ntx);
         
@@ -85,7 +86,7 @@ for m=1:length(SNR)
     ber_sim_16qam_mimo_mmse(m) = total_errors_mmse/symbol_bits/ntx/Nav;
     
     %===Print===
-    str=sprintf('SNR=%f. BER_zfe=%f, BER_mmse=%f/n',SNR(m),ber_sim_16qam_mimo_zfe(m),ber_sim_16qam_mimo_mmse(m));
+    str=sprintf('SNR=%f, BER_zfe=%f, BER_mmse=%f/n',SNR(m),ber_sim_16qam_mimo_zfe(m),ber_sim_16qam_mimo_mmse(m));
     disp(str);
     toc
 end
@@ -100,4 +101,7 @@ xlim([SNR_start SNR_end])
 
 true(ber_sim_16qam_mimo_mmse(1)<ber_sim_16qam_mimo_zfe(1))
 
+%===Save results===
+str_save = ['lab10_MIMO_' num2str(ntx) 'Nt_' num2str(nrx) 'Nr_' num2str(Nav) 'Nav'];
+save(str_save);
 toc
