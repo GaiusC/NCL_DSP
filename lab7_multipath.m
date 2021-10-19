@@ -107,7 +107,7 @@ end
 %===plot results===
 figure()
 semilogy(SNR,BER_BPSK_AWGN,'c-',SNR,BER_BPSK_MP,'r-',SNR,BER_16QAM_AWGN,'b-',SNR,ber_sim_16qam_awgn,'gs',SNR,Pb_MP,'m-',SNR,ber_sim_16qam_mp,'x-k');
-legend('BPSK AWGN','BPSK MP','16 QAM AWGN(Theory)','16 QAM MP(Semi.)','16 QAM MF MP (Sim.)');
+legend('BPSK AWGN','BPSK MP','16 QAM AWGN(Theory)','16 QAM MF(Sim.)','16 QAM MP(Semi.)','16 QAM MF MP (Sim.)');
 ylim([1e-5 1]);
 xlim([0 30]);
 grid on;
