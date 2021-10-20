@@ -1,3 +1,5 @@
+%Author: J.Chen
+%Matlab Version: R2021a
 clear, clc, close all
 tic
 %===Reset random number===
@@ -155,4 +157,4 @@ xlim([0 30]);
 grid on;
 
 %===Save results===
-save lab8_OFDM_MP_results;
+save MP_KnownCH;

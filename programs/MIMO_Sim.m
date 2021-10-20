@@ -1,3 +1,5 @@
+%Author: J.Chen
+%Matlab Version: R2021a
 clear, clc, close all
 tic
 %===Reset random number===
@@ -10,7 +12,7 @@ RandStream.setGlobalStream(RS);
 M = 16;% M for 16 QAM
 symbol_bits = log2(M);% 4 bits for a symbol in 16 QAM
 SNR_start = 0;
-SNR_step = 1;
+SNR_step = 5;
 SNR_end = 40;
 SNR = SNR_start:SNR_step:SNR_end;% define SNR
 SNR_lin = 10.^(SNR/10);% multipath linear SNR
@@ -26,7 +28,7 @@ ntx = 2;% number of transmitters
 nrx = [2 3 5 10];% number of receivers
 
 %===Simulation===
-Nav = 1e4;% number of average loops
+Nav = 1e5;% number of average loops
 %---define the size of variables---
 C_Dk_zfe = zeros(1,ntx);
 C_Dk_mmse = zeros(1,ntx);
@@ -106,5 +108,6 @@ xlim([SNR_start SNR_end])
 hold off;
 
 %===Save results===
-save MIMO_Sim;
+save_str=['MIMO_Sim_',num2str(Nav),'Nav'];
+save(save_str);
 toc
